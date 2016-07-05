@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--实体类命名 -->
+    <typeAliases>
+        <typeAlias type="com.kaishengit.pojo.User" alias="User"/>
+        <typeAlias type="com.kaishengit.pojo.Node" alias="Node"/>
+        <typeAlias type="com.kaishengit.pojo.ForumUser" alias="ForumUser"/>
+        <typeAlias type="com.kaishengit.pojo.Topic" alias="Topic"/>
+        <typeAlias type="com.kaishengit.pojo.Tag" alias="Tag"/>
+    </typeAliases>
+
+    <environments default="dev">
+        <environment id="dev">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"/>
+                <property name="url" value="jdbc:mysql:///forum"/>
+                <property name="username" value="root"/>
+                <property name="password" value="root"/>
+
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="mapper/UserMapper.xml"/>
+        <mapper resource="mapper/NodeMapper.xml"/>
+        <mapper resource="mapper/ForumMapper.xml"/>
+        <mapper resource="mapper/TopicMapper.xml"/>
+    </mappers>
+
+</configuration>

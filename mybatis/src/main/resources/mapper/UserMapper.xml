@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.mapper.UserMapper">
+
+    <select id="finByParams" resultType="com.kaishengit.pojo.UserAdmin">
+        SELECT * FROM admin where name=#{username} and password=#{pwd}
+   </select>
+
+
+    <select id="findById" parameterType="int" resultType="User">
+        SELECT * FROM book WHERE id= #{id}
+    </select>
+
+
+    <update id="update" parameterType="User">
+       UPDATE book SET code=#{code},title=#{title},author=#{author},publishing=#{publishing},total=#{total}, count=#{count} WHERE id=#{id}
+    </update>
+
+    <insert id="save" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+       INSERT INTO book(code,title,author,publishing,total,count)VALUES (#{code},#{title},#{author},#{publishing},#{total},#{count})
+    </insert>
+    <delete id="delete" parameterType="int">
+       DELETE  from book where id=#{id}
+   </delete>
+    <select id="findAll" resultType="User">
+         SELECT * from book
+    </select>
+
+
+    <select id="findTiaoJian" parameterType="map" resultType="User">
+        SELECT * from book
+        <where>
+            <if test=" code!=null  and  code != '' ">
+                code=#{code}
+            </if>
+            <if test=" title!=null and  title!= ''">
+                title=#{title}
+            </if>
+            <if test="author!=null and  author!=''">
+                author=#{author}
+            </if>
+
+        </where>
+    </select>
+
+</mapper>

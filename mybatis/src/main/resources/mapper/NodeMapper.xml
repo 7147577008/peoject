@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.mapper.NodeMapper">
+    <cache/> <!--声明二级缓存 -->
+    <!--useCache:false 不使用二级缓存-->
+    <select id="findOneId" parameterType="int" resultType="Node" useCache="false">
+        SELECT * FROM  t_node where id=#{id}
+    </select>
+   <!--批量新增 需要用list-->
+    <insert id="batchSave" parameterType="list">
+        INSERT INTO t_node(nodename) VALUES
+        <foreach collection="list" item="node" separator=",">
+            (#{node.nodename})
+        </foreach>
+    </insert>
+    <!--批量删除 -->
+    <delete id="delete" parameterType="list">
+        DELETE FROM t_node WHERE id IN
+        <foreach collection="list" item="user" separator="," open="(" close=")">
+            #{user}
+        </foreach>
+    </delete>
+
+    <!--批量查询 -->
+    <select id="findById" parameterType="list" resultType="Node">
+        SELECT * FROM t_node WHERE id IN
+        <foreach collection="list" item="id" separator="," open="(" close=")">
+            #{id}
+        </foreach>
+    </select>
+
+</mapper>
