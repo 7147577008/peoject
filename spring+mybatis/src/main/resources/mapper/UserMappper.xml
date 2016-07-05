@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kaishengit.mapper.UserMapper">
+
+    <insert id="save" parameterType="User">
+      INSERT  INTO t_user(name,address,password)VALUES(#{name},#{address},#{password})
+    </insert>
+
+    <select id="finById" parameterType="int" resultType="User">
+        SELECT * FROM  t_user WHERE id=#{id}
+    </select>
+
+    <select id="findByName" parameterType="string" resultType="User">
+        SELECT  * FROM  t_user WHERE  name=#{name}
+    </select>
+
+
+</mapper>
